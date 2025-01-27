@@ -12,8 +12,9 @@ public static class StockMappers
             Id = stockModel.Id,
             Symbol = stockModel.Symbol,
             CompanyName = stockModel.CompanyName,
-            Industry = stockModel.Industry,
+            Purchase = stockModel.Purchase,
             LastDiv = stockModel.LastDiv,
+            Industry = stockModel.Industry,
             MarketCap = stockModel.MarketCap,
         };
     }
