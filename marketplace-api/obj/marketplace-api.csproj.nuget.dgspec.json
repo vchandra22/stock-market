@@ -1,0 +1,84 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/thinkpad/Documents/sandbox/dotnet/marketplace-api/marketplace-api/marketplace-api.csproj": {}
+  },
+  "projects": {
+    "/home/thinkpad/Documents/sandbox/dotnet/marketplace-api/marketplace-api/marketplace-api.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/thinkpad/Documents/sandbox/dotnet/marketplace-api/marketplace-api/marketplace-api.csproj",
+        "projectName": "marketplace-api",
+        "projectPath": "/home/thinkpad/Documents/sandbox/dotnet/marketplace-api/marketplace-api/marketplace-api.csproj",
+        "packagesPath": "/home/thinkpad/.nuget/packages/",
+        "outputPath": "/home/thinkpad/Documents/sandbox/dotnet/marketplace-api/marketplace-api/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/thinkpad/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[8.0.12, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.11, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.6.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.112/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

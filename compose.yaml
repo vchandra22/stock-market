@@ -1,0 +1,6 @@
+﻿services:
+  marketplace-api:
+    image: marketplace-api
+    build:
+      context: .
+      dockerfile: marketplace-api/Dockerfile
