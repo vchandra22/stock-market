@@ -1,9 +1,7 @@
 namespace marketplace_api.Dtos.Stock;
 
-public class StockDto
+public class CreateStockRequestDto
 {
-    public Guid Id { get; set; } = Guid.NewGuid();
-    
     public string Symbol { get; set; } = string.Empty;
     
     public string CompanyName { get; set; } = string.Empty;

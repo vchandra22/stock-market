@@ -1,4 +1,5 @@
 using marketplace_api.Data;
+using marketplace_api.Dtos.Stock;
 using marketplace_api.Mappers;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,8 +25,8 @@ public class StockController : ControllerBase
         return Ok(stocks);
     }
 
-    [HttpGet("{id}")]
-    public IActionResult GetById([FromRoute] int id)
+    [HttpGet("{id:guid}")]
+    public IActionResult GetById([FromRoute] Guid id)
     {
         var stock = _context.Stocks.Find(id);
 
@@ -35,5 +36,14 @@ public class StockController : ControllerBase
         }
         
         return Ok(stock.ToStockDto());
+    }
+
+    [HttpPost]
+    public IActionResult Create([FromBody] CreateStockRequestDto stockDto)
+    {
+        var stockModel = stockDto.ToStockFromCreateDTO();
+        _context.Stocks.Add(stockModel);
+        _context.SaveChanges();
+        return CreatedAtAction(nameof(GetById), new { id = stockModel.Id }, stockModel.ToStockDto());
     }
 }

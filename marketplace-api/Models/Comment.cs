@@ -2,7 +2,7 @@ namespace marketplace_api.Models;
 
 public class Comment
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid();
 
     public string Title { get; set; } = string.Empty;
 

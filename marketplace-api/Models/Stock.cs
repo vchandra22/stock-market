@@ -4,7 +4,7 @@ namespace marketplace_api.Models;
 
 public class Stock
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid();
     
     public string Symbol { get; set; } = string.Empty;
     
