@@ -69,4 +69,20 @@ public class StockController : ControllerBase
         
         return Ok(stockModel.ToStockDto());
     }
+
+    [HttpDelete]
+    [Route("{id:guid}")]
+    public IActionResult Delete([FromRoute] Guid id)
+    {
+        var stockModel = _context.Stocks.FirstOrDefault(x => x.Id == id);
+
+        if (stockModel is null)
+        {
+            return NotFound();
+        }
+        
+        _context.Stocks.Remove(stockModel);
+        _context.SaveChanges();
+        return NoContent();
+    }
 }
