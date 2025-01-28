@@ -1,5 +1,6 @@
 using marketplace_api.Data;
 using marketplace_api.Dtos.Stock;
+using marketplace_api.Interfaces;
 using marketplace_api.Mappers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,16 +12,18 @@ namespace marketplace_api.Controllers;
 public class StockController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
+    private readonly IStockRepository _stockRepository;
     
-    public StockController(ApplicationDbContext context)
+    public StockController(ApplicationDbContext context, IStockRepository stockRepository)
     {
+        _stockRepository = stockRepository;
         _context = context;
     }
 
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var stocks = await _context.Stocks.ToListAsync();
+        var stocks = await _stockRepository.GetAllAsync();
         
         var stockDto = stocks.Select(s => s.ToStockDto());
         
@@ -30,7 +33,7 @@ public class StockController : ControllerBase
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetById([FromRoute] Guid id)
     {
-        var stock = await _context.Stocks.FindAsync(id);
+        var stock = await _stockRepository.GetByIdAsync(id);
 
         if (stock is null)
         {
@@ -45,9 +48,9 @@ public class StockController : ControllerBase
     {
         var stockModel = stockDto.ToStockFromCreateDTO();
         
-        await _context.Stocks.AddAsync(stockModel);
+        await _stockRepository.AddAsync(stockModel);
         
-        await _context.SaveChangesAsync();
+        await _stockRepository.SaveChangesAsync();
         
         return CreatedAtAction(nameof(GetById), new { id = stockModel.Id }, stockModel.ToStockDto());
     }
@@ -70,7 +73,7 @@ public class StockController : ControllerBase
         stockModel.Industry = updateDto.Industry;
         stockModel.MarketCap = updateDto.MarketCap;
         
-        await _context.SaveChangesAsync();
+        await _stockRepository.SaveChangesAsync();
         
         return Ok(stockModel.ToStockDto());
     }
@@ -85,10 +88,10 @@ public class StockController : ControllerBase
         {
             return NotFound();
         }
+
+        await _stockRepository.DeleteAsync(id);
         
-        _context.Stocks.Remove(stockModel);
-        
-        await _context.SaveChangesAsync();
+        await _stockRepository.SaveChangesAsync();
         
         return NoContent();
     }
