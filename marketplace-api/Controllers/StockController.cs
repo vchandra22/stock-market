@@ -3,6 +3,7 @@ using marketplace_api.Dtos.Stock;
 using marketplace_api.Interfaces;
 using marketplace_api.Mappers;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 
 namespace marketplace_api.Controllers;
@@ -48,9 +49,7 @@ public class StockController : ControllerBase
     {
         var stockModel = stockDto.ToStockFromCreateDTO();
         
-        await _stockRepository.AddAsync(stockModel);
-        
-        await _stockRepository.SaveChangesAsync();
+        await _stockRepository.CreateAsync(stockModel);
         
         return CreatedAtAction(nameof(GetById), new { id = stockModel.Id }, stockModel.ToStockDto());
     }
@@ -59,21 +58,12 @@ public class StockController : ControllerBase
     [Route("{id:guid}")]
     public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateStockRequestDto updateDto)
     {
-        var stockModel = await _context.Stocks.FirstOrDefaultAsync(x => x.Id == id);
+        var stockModel = await _stockRepository.UpdateAsync(id, updateDto);
 
         if (stockModel is null)
         {
             return NotFound();
         }
-        
-        stockModel.Symbol = updateDto.Symbol;
-        stockModel.CompanyName = updateDto.CompanyName;
-        stockModel.Purchase = updateDto.Purchase;
-        stockModel.LastDiv = updateDto.LastDiv;
-        stockModel.Industry = updateDto.Industry;
-        stockModel.MarketCap = updateDto.MarketCap;
-        
-        await _stockRepository.SaveChangesAsync();
         
         return Ok(stockModel.ToStockDto());
     }
@@ -82,17 +72,8 @@ public class StockController : ControllerBase
     [Route("{id:guid}")]
     public async Task<IActionResult> Delete([FromRoute] Guid id)
     {
-        var stockModel = await _context.Stocks.FirstOrDefaultAsync(x => x.Id == id);
-
-        if (stockModel is null)
-        {
-            return NotFound();
-        }
-
         await _stockRepository.DeleteAsync(id);
         
-        await _stockRepository.SaveChangesAsync();
-        
-        return NoContent();
+        return Ok();
     }
 }

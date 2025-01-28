@@ -1,4 +1,5 @@
 using marketplace_api.Data;
+using marketplace_api.Dtos.Stock;
 using marketplace_api.Interfaces;
 using marketplace_api.Models;
 using Microsoft.EntityFrameworkCore;
@@ -14,9 +15,9 @@ public class StockRepository : IStockRepository
         _context = context;
     }
     
-    public Task<List<Stock>> GetAllAsync()
+    public async Task<List<Stock>> GetAllAsync()
     {
-        return _context.Stocks.ToListAsync();
+        return await _context.Stocks.ToListAsync();
     }
 
     public async Task<Stock?> GetByIdAsync(Guid id)
@@ -24,22 +25,47 @@ public class StockRepository : IStockRepository
         return await _context.Stocks.FindAsync(id);
     }
 
-    public async Task AddAsync(Stock stock)
+    public async Task<Stock> CreateAsync(Stock stockModel)
     {
-        await _context.Stocks.AddAsync(stock);
-    }
-
-    public async Task SaveChangesAsync()
-    {
+        await _context.Stocks.AddAsync(stockModel);
         await _context.SaveChangesAsync();
+        
+        return stockModel;
+    }
+    
+    public async Task<Stock> DeleteAsync(Guid id)
+    {
+        var stockModel = await GetByIdAsync(id);
+        
+        if (stockModel is null)
+        {
+            return null;
+        }
+        
+        _context.Stocks.Remove(stockModel);
+        await _context.SaveChangesAsync();
+        
+        return stockModel;
     }
 
-    public async Task DeleteAsync(Guid id)
+    public async Task<Stock?> UpdateAsync(Guid id, UpdateStockRequestDto stockRequestDto)
     {
-        var stock = await GetByIdAsync(id);
-        if (stock is not null)
+        var existingStock = await _context.Stocks.FirstOrDefaultAsync(x => x.Id == id);
+
+        if (existingStock is null)
         {
-            _context.Stocks.Remove(stock);
+            return null;
         }
+        
+        existingStock.Symbol = stockRequestDto.Symbol;
+        existingStock.CompanyName = stockRequestDto.CompanyName;
+        existingStock.Purchase = stockRequestDto.Purchase;
+        existingStock.LastDiv = stockRequestDto.LastDiv;
+        existingStock.Industry = stockRequestDto.Industry;
+        existingStock.MarketCap = stockRequestDto.MarketCap;
+        
+        await _context.SaveChangesAsync();
+        
+        return existingStock;
     }
 }
