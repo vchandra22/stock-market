@@ -3,8 +3,6 @@ using marketplace_api.Dtos.Stock;
 using marketplace_api.Interfaces;
 using marketplace_api.Mappers;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.EntityFrameworkCore;
 
 namespace marketplace_api.Controllers;
 
@@ -31,7 +29,8 @@ public class StockController : ControllerBase
         return Ok(stockDto);
     }
 
-    [HttpGet("{id:guid}")]
+    [HttpGet]
+    [Route("{id:guid}")]
     public async Task<IActionResult> GetById([FromRoute] Guid id)
     {
         var stock = await _stockRepository.GetByIdAsync(id);

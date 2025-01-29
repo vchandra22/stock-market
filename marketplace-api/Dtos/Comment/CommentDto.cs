@@ -1,6 +1,6 @@
-namespace marketplace_api.Models;
+namespace marketplace_api.Dtos.Comment;
 
-public class Comment
+public class CommentDto
 {
     public Guid Id { get; set; } = Guid.NewGuid();
 
@@ -11,6 +11,5 @@ public class Comment
     public DateTime CreatedOn { get; set; } = DateTime.Now;
     
     public Guid? StockId { get; set; }
-
-    public Stock? Stock { get; set; }
+    
 }

@@ -110,3 +110,7 @@
 /home/thinkpad/Documents/sandbox/dotnet/marketplace-api/marketplace-api/bin/Debug/net8.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.resources.dll
 /home/thinkpad/Documents/sandbox/dotnet/marketplace-api/marketplace-api/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll
 /home/thinkpad/Documents/sandbox/dotnet/marketplace-api/marketplace-api/obj/Debug/net8.0/marketplace-api.sourcelink.json
+/home/thinkpad/Documents/sandbox/dotnet/marketplace-api/marketplace-api/bin/Debug/net8.0/Microsoft.AspNetCore.JsonPatch.dll
+/home/thinkpad/Documents/sandbox/dotnet/marketplace-api/marketplace-api/bin/Debug/net8.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+/home/thinkpad/Documents/sandbox/dotnet/marketplace-api/marketplace-api/bin/Debug/net8.0/Newtonsoft.Json.dll
+/home/thinkpad/Documents/sandbox/dotnet/marketplace-api/marketplace-api/bin/Debug/net8.0/Newtonsoft.Json.Bson.dll
