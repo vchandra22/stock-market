@@ -23,6 +23,9 @@ public class CommentController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+        
         var comments = await _commentRepository.GetAllAsync();
 
         var commentDto = comments.Select(s => s.ToCommentDto());
@@ -34,6 +37,9 @@ public class CommentController : ControllerBase
     [Route("{id:guid}")]
     public async Task<IActionResult> GetById([FromRoute] Guid id)
     {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+        
         var comment = await _commentRepository.GetByIdAsync(id);
 
         if (comment is null)
@@ -46,8 +52,11 @@ public class CommentController : ControllerBase
 
     [HttpPost]
     [Route("{stockId}")]
-    public async Task<IActionResult> CreateAsync([FromRoute] Guid stockId, CreateCommentRequestDto commentDto)
+    public async Task<IActionResult> Create([FromRoute] Guid stockId, CreateCommentRequestDto commentDto)
     {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+        
         if (!await _stockRepository.StockExists(stockId))
         {
             return BadRequest("Stock has not been found");
@@ -63,6 +72,9 @@ public class CommentController : ControllerBase
     [Route("{id:guid}")]
     public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateCommentRequestDto updateDto)
     {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+        
         var comment = await _commentRepository.UpdateAsync(id, updateDto.ToCommentFromUpdate());
 
         if (comment is null)
@@ -77,6 +89,9 @@ public class CommentController : ControllerBase
     [Route("{id:guid}")]
     public async Task<IActionResult> Delete([FromRoute] Guid id)
     {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+        
         var commentModel = await _commentRepository.DeleteAsync(id);
 
         if (commentModel is null)
@@ -84,6 +99,6 @@ public class CommentController : ControllerBase
             return NotFound("Comment not found");
         }
         
-        return Ok(commentModel);
+        return Ok();
     }
 }

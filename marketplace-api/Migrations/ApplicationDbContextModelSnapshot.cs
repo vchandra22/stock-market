@@ -83,11 +83,9 @@ namespace marketplace_api.Migrations
 
             modelBuilder.Entity("marketplace_api.Models.Comment", b =>
                 {
-                    b.HasOne("marketplace_api.Models.Stock", "Stock")
+                    b.HasOne("marketplace_api.Models.Stock", null)
                         .WithMany("Comments")
                         .HasForeignKey("StockId");
-
-                    b.Navigation("Stock");
                 });
 
             modelBuilder.Entity("marketplace_api.Models.Stock", b =>

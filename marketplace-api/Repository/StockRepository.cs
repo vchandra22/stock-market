@@ -42,6 +42,8 @@ public class StockRepository : IStockRepository
             return null;
         }
         
+        _context.Comments.RemoveRange(stockModel.Comments);
+        
         _context.Stocks.Remove(stockModel);
         await _context.SaveChangesAsync();
         

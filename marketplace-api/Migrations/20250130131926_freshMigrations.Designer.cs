@@ -12,8 +12,8 @@ using marketplace_api.Data;
 namespace marketplace_api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250127082343_updateIdUsingGuid")]
-    partial class updateIdUsingGuid
+    [Migration("20250130131926_freshMigrations")]
+    partial class freshMigrations
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,10 +38,7 @@ namespace marketplace_api.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int?>("StockId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("StockId1")
+                    b.Property<Guid?>("StockId")
                         .HasColumnType("char(36)");
 
                     b.Property<string>("Title")
@@ -50,7 +47,7 @@ namespace marketplace_api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StockId1");
+                    b.HasIndex("StockId");
 
                     b.ToTable("Comments");
                 });
@@ -89,11 +86,9 @@ namespace marketplace_api.Migrations
 
             modelBuilder.Entity("marketplace_api.Models.Comment", b =>
                 {
-                    b.HasOne("marketplace_api.Models.Stock", "Stock")
+                    b.HasOne("marketplace_api.Models.Stock", null)
                         .WithMany("Comments")
-                        .HasForeignKey("StockId1");
-
-                    b.Navigation("Stock");
+                        .HasForeignKey("StockId");
                 });
 
             modelBuilder.Entity("marketplace_api.Models.Stock", b =>
