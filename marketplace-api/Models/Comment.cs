@@ -11,6 +11,4 @@ public class Comment
     public DateTime CreatedOn { get; set; } = DateTime.Now;
     
     public Guid? StockId { get; set; }
-
-    public Stock? Stock { get; set; }
 }

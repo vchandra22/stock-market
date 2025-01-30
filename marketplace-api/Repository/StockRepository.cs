@@ -48,6 +48,11 @@ public class StockRepository : IStockRepository
         return stockModel;
     }
 
+    public Task<bool> StockExists(Guid id)
+    {
+        return _context.Stocks.AnyAsync(i => i.Id == id);
+    }
+
     public async Task<Stock?> UpdateAsync(Guid id, UpdateStockRequestDto stockRequestDto)
     {
         var existingStock = await _context.Stocks.FirstOrDefaultAsync(x => x.Id == id);
