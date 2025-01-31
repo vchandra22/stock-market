@@ -3,6 +3,7 @@ using marketplace_api.Dtos.Comment;
 using marketplace_api.Interfaces;
 using marketplace_api.Mappers;
 using marketplace_api.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace marketplace_api.Controllers;
@@ -52,6 +53,7 @@ public class CommentController : ControllerBase
 
     [HttpPost]
     [Route("{stockId}")]
+    [Authorize]
     public async Task<IActionResult> Create([FromRoute] Guid stockId, CreateCommentRequestDto commentDto)
     {
         if (!ModelState.IsValid)
@@ -70,6 +72,7 @@ public class CommentController : ControllerBase
 
     [HttpPut]
     [Route("{id:guid}")]
+    [Authorize]
     public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateCommentRequestDto updateDto)
     {
         if (!ModelState.IsValid)
@@ -87,6 +90,7 @@ public class CommentController : ControllerBase
 
     [HttpDelete]
     [Route("{id:guid}")]
+    [Authorize]
     public async Task<IActionResult> Delete([FromRoute] Guid id)
     {
         if (!ModelState.IsValid)

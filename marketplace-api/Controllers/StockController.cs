@@ -3,6 +3,7 @@ using marketplace_api.Dtos.Stock;
 using marketplace_api.Helpers;
 using marketplace_api.Interfaces;
 using marketplace_api.Mappers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace marketplace_api.Controllers;
@@ -21,6 +22,7 @@ public class StockController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize]
     public async Task<IActionResult> GetAll([FromQuery] QueryObject query)
     {
         if (!ModelState.IsValid)
@@ -35,6 +37,7 @@ public class StockController : ControllerBase
 
     [HttpGet]
     [Route("{id:guid}")]
+    [Authorize]
     public async Task<IActionResult> GetById([FromRoute] Guid id)
     {
         if (!ModelState.IsValid)
@@ -51,6 +54,7 @@ public class StockController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> Create([FromBody] CreateStockRequestDto stockDto)
     {
         if (!ModelState.IsValid)
@@ -65,6 +69,7 @@ public class StockController : ControllerBase
 
     [HttpPut]
     [Route("{id:guid}")]
+    [Authorize]
     public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateStockRequestDto updateDto)
     {
         if (!ModelState.IsValid)
@@ -82,6 +87,7 @@ public class StockController : ControllerBase
 
     [HttpDelete]
     [Route("{id:guid}")]
+    [Authorize]
     public async Task<IActionResult> Delete([FromRoute] Guid id)
     {
         if (!ModelState.IsValid)
