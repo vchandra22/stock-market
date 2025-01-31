@@ -114,3 +114,16 @@
 /home/thinkpad/Documents/sandbox/dotnet/marketplace-api/marketplace-api/bin/Debug/net8.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 /home/thinkpad/Documents/sandbox/dotnet/marketplace-api/marketplace-api/bin/Debug/net8.0/Newtonsoft.Json.dll
 /home/thinkpad/Documents/sandbox/dotnet/marketplace-api/marketplace-api/bin/Debug/net8.0/Newtonsoft.Json.Bson.dll
+/home/thinkpad/Documents/sandbox/dotnet/marketplace-api/marketplace-api/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/home/thinkpad/Documents/sandbox/dotnet/marketplace-api/marketplace-api/bin/Debug/net8.0/Microsoft.AspNetCore.Cryptography.Internal.dll
+/home/thinkpad/Documents/sandbox/dotnet/marketplace-api/marketplace-api/bin/Debug/net8.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+/home/thinkpad/Documents/sandbox/dotnet/marketplace-api/marketplace-api/bin/Debug/net8.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+/home/thinkpad/Documents/sandbox/dotnet/marketplace-api/marketplace-api/bin/Debug/net8.0/Microsoft.Extensions.Identity.Core.dll
+/home/thinkpad/Documents/sandbox/dotnet/marketplace-api/marketplace-api/bin/Debug/net8.0/Microsoft.Extensions.Identity.Stores.dll
+/home/thinkpad/Documents/sandbox/dotnet/marketplace-api/marketplace-api/bin/Debug/net8.0/Microsoft.IdentityModel.Abstractions.dll
+/home/thinkpad/Documents/sandbox/dotnet/marketplace-api/marketplace-api/bin/Debug/net8.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/home/thinkpad/Documents/sandbox/dotnet/marketplace-api/marketplace-api/bin/Debug/net8.0/Microsoft.IdentityModel.Logging.dll
+/home/thinkpad/Documents/sandbox/dotnet/marketplace-api/marketplace-api/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.dll
+/home/thinkpad/Documents/sandbox/dotnet/marketplace-api/marketplace-api/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/home/thinkpad/Documents/sandbox/dotnet/marketplace-api/marketplace-api/bin/Debug/net8.0/Microsoft.IdentityModel.Tokens.dll
+/home/thinkpad/Documents/sandbox/dotnet/marketplace-api/marketplace-api/bin/Debug/net8.0/System.IdentityModel.Tokens.Jwt.dll
