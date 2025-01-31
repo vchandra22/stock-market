@@ -1,5 +1,6 @@
 using marketplace_api.Data;
 using marketplace_api.Dtos.Stock;
+using marketplace_api.Helpers;
 using marketplace_api.Interfaces;
 using marketplace_api.Models;
 using Microsoft.EntityFrameworkCore;
@@ -15,11 +16,23 @@ public class StockRepository : IStockRepository
         _context = context;
     }
     
-    public async Task<List<Stock>> GetAllAsync()
+    public async Task<List<Stock>> GetAllAsync(QueryObject query)
     {
-        return await _context.Stocks.Include(c => c.Comments).ToListAsync();
-    }
+        var stocks = _context.Stocks.Include(c => c.Comments).AsQueryable();
 
+        if (!string.IsNullOrWhiteSpace(query.CompanyName))
+        {
+            stocks = stocks.Where(s => s.CompanyName.Contains(query.CompanyName));
+        }
+
+        if (!string.IsNullOrWhiteSpace(query.Symbol))
+        {
+            stocks = stocks.Where(s => s.Symbol.Contains(query.Symbol));
+        }
+        
+        return await stocks.ToListAsync();
+    }
+    
     public async Task<Stock?> GetByIdAsync(Guid id)
     {
         return await _context.Stocks.Include(c => c.Comments).FirstOrDefaultAsync(i => i.Id == id);
