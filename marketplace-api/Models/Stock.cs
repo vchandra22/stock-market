@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace marketplace_api.Models;
 
+[Table("Stocks")]
 public class Stock
 {
     public Guid Id { get; set; } = Guid.NewGuid();
@@ -21,4 +22,7 @@ public class Stock
     public long MarketCap { get; set; }
     
     public List<Comment> Comments { get; set; } = new List<Comment>();
+    
+    public List<Portfolio> Portfolios { get; set; } = new List<Portfolio>();
+
 }
