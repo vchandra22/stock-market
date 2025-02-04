@@ -12,8 +12,8 @@ using marketplace_api.Data;
 namespace marketplace_api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250201000832_portfolioManyToMany")]
-    partial class portfolioManyToMany
+    [Migration("20250203143100_commentsOneToOne")]
+    partial class commentsOneToOne
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,13 +53,13 @@ namespace marketplace_api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9920e4c5-a2ba-432e-a0c2-93c0284b90bb",
+                            Id = "87a455c9-056e-4122-a89f-996c6ee93987",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "e28018bc-51b3-4bdb-bd1a-ecda13f408f4",
+                            Id = "8fa6a494-a408-4cdd-bf73-e0d7b46b0ea8",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -241,6 +241,10 @@ namespace marketplace_api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -256,6 +260,8 @@ namespace marketplace_api.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
 
                     b.HasIndex("StockId");
 
@@ -362,9 +368,17 @@ namespace marketplace_api.Migrations
 
             modelBuilder.Entity("marketplace_api.Models.Comment", b =>
                 {
+                    b.HasOne("marketplace_api.Models.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("marketplace_api.Models.Stock", null)
                         .WithMany("Comments")
                         .HasForeignKey("StockId");
+
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("marketplace_api.Models.Portfolio", b =>

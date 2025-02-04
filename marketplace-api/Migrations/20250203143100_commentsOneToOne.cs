@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace marketplace_api.Migrations
 {
     /// <inheritdoc />
-    public partial class portfolioManyToMany : Migration
+    public partial class commentsOneToOne : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -229,11 +229,19 @@ namespace marketplace_api.Migrations
                     Content = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    StockId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci")
+                    StockId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
+                    AppUserId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Comments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Comments_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Comments_Stocks_StockId",
                         column: x => x.StockId,
@@ -273,8 +281,8 @@ namespace marketplace_api.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "9920e4c5-a2ba-432e-a0c2-93c0284b90bb", null, "Admin", "ADMIN" },
-                    { "e28018bc-51b3-4bdb-bd1a-ecda13f408f4", null, "User", "USER" }
+                    { "87a455c9-056e-4122-a89f-996c6ee93987", null, "Admin", "ADMIN" },
+                    { "8fa6a494-a408-4cdd-bf73-e0d7b46b0ea8", null, "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -313,6 +321,11 @@ namespace marketplace_api.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_AppUserId",
+                table: "Comments",
+                column: "AppUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_StockId",
